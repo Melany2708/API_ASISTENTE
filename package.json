@@ -1,0 +1,27 @@
+{
+  "name": "api-asistente",
+  "version": "1.0.0",
+  "description": "Amelia, agenda y asistente personal",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Melany2708/API_ASISTENTE.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Melany2708/API_ASISTENTE/issues"
+  },
+  "homepage": "https://github.com/Melany2708/API_ASISTENTE#readme",
+  "engines": {
+    "node": ">=24"
+  },
+  "dependencies": {
+    "web-push": "4.0.0"
+  }
+}
