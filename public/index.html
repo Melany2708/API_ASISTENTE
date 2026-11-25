@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#fbf7f3">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="apple-touch-icon" href="/icon.png">
+<link rel="stylesheet" href="/style.css">
+<script src="/app.js" defer></script>
+<title>Amelia · Tu agenda personal</title>
+</head>
+<body>
+<div class="shell">
+  <aside class="sidebar">
+    <a href="#" class="brand"><span class="brand-icon" data-icon="spark"></span><span>Amelia<small>ASISTENTE PERSONAL</small></span></a>
+    <nav aria-label="Secciones"></nav>
+    <div class="device"><span data-icon="devices"></span><div><b>Tus dispositivos</b><small id="sync-status">Conectando…</small></div></div>
+    <button class="logout" id="logout"><span data-icon="logout"></span> Cerrar sesión</button>
+  </aside>
+  <main>
+    <header class="topbar"><div id="today-label"></div><div class="top-actions"><button id="bell" class="icon-button" aria-label="Notificaciones" data-icon="bell"></button><div class="avatar" aria-label="Melany">M</div></div></header>
+    <section id="overview">
+      <div class="hero">
+        <div><p class="kicker"><span data-icon="spark"></span> TU AGENDA PERSONAL</p><h1>Hola, <em>Melany.</em></h1><p id="greeting"></p><button class="primary" id="hero-add"><span data-icon="plus"></span> Añadir a mi agenda</button></div>
+        <svg class="flower" viewBox="0 0 280 240" fill="none" aria-hidden="true">
+          <g stroke="currentColor" stroke-width="1.25">
+            <path d="M109 241c23-43 40-97 55-162m-19 68c-13-30-31-42-65-50 4 26 29 48 65 50Zm-17 48c23-28 46-38 82-43-15 33-45 49-82 43Zm37-113c-12-22-31-28-50-24 3 19 25 36 50 24Zm2 0c25 4 43-4 52-26-23-8-45 4-52 26Zm-1-2c4-27-7-47-26-60-14 23-2 47 26 60Zm3 1c25-14 34-38 25-64-22 12-34 38-25 64Zm-5 2c-24 6-38 24-40 43 25 3 43-18 40-43Zm4 0c-1 23 13 40 33 43 6-21-10-41-33-43Z"/>
+            <path d="M168 83c18 11 37 16 53 1-13-17-34-14-53-1ZM107 237c-7-28-27-49-55-57 3 25 26 50 55 57Zm51-50c16-5 27-12 39-24m-63-22c-15-13-23-20-43-34m67-31c-5-13-9-27-16-42m29 44c7-18 13-29 20-44m-58 84c8-11 16-19 26-29m18 3c10 10 15 17 19 28"/>
+          </g>
+          <g stroke="currentColor"><path d="M74 52v18m-9-9h18m145 58v14m-7-7h14m-9-101v14m-7-7h14"/></g>
+        </svg>
+      </div>
+      <div class="stats" id="stats"></div>
+      <div class="dashboard"><section class="panel"><div class="panel-heading"><div><h2>Tu agenda de hoy</h2><p id="today-date"></p></div><button class="subtle" data-view="agenda">Ver agenda <span data-icon="arrow"></span></button></div><div id="today-items"></div></section>
+      <section class="panel"><div class="panel-heading"><div><h2>Por hacer</h2><p>Tus siguientes pasos</p></div><button class="icon-button" aria-label="Añadir tarea" data-add="task" data-icon="plus"></button></div><div id="today-tasks"></div></section></div>
+      <section class="panel upcoming"><div class="panel-heading"><h2>Fechas especiales</h2><button class="subtle" data-add="birthday"><span data-icon="plus"></span> Añadir fecha</button></div><div id="special-items"></div></section>
+    </section>
+    <section id="details" hidden><div class="page-heading"><div><p class="kicker">MI ESPACIO</p><h1 id="view-title"></h1><p id="view-description"></p></div><button class="primary" id="view-add"><span data-icon="plus"></span> Añadir</button></div>
+    <section class="panel" id="drive-panel" hidden><div class="panel-heading"><div><h2>Google Drive</h2><p id="drive-status"></p></div><button id="drive-connect" class="subtle">Conectar Drive</button></div></section>
+    <section class="panel" id="calendar-panel" hidden><div class="panel-heading"><button class="icon-button" id="prev" aria-label="Mes anterior" data-icon="left"></button><h2 id="month-label"></h2><button class="icon-button" id="next" aria-label="Mes siguiente" data-icon="arrow"></button></div><div id="calendar"></div></section>
+    <section class="panel"><div class="panel-heading"><h2 id="list-title"></h2><span id="list-count"></span></div><div id="view-items"></div></section></section>
+  </main>
+</div>
+<dialog id="editor"><form id="item-form">
+  <div class="dialog-heading"><div><p class="kicker">MI AGENDA</p><h2 id="editor-title">Añadir a mi agenda</h2></div><button type="button" class="icon-button close" aria-label="Cerrar" data-icon="x"></button></div>
+  <label>¿Qué quieres añadir?<select id="kind" name="kind"></select></label>
+  <label>Título<input name="title" required maxlength="150" placeholder="Ej. Entregar el informe"></label>
+  <div class="form-grid"><label id="date-label">¿Qué día es?<input type="date" name="date" required></label><label id="time-label">¿A qué hora?<input type="time" name="time" required></label></div>
+  <div class="form-grid"><label id="duration-label">Duración en minutos<input type="number" name="duration" min="5" max="720" value="60"></label><label>Repetir<select name="repeat"><option value="none">Una sola vez</option><option value="weekly">Cada semana</option><option value="annual">Cada año</option></select></label></div>
+  <label>Avísame<select name="reminder"><option value="0">A la hora programada</option><option value="5">5 minutos antes</option><option value="15">15 minutos antes</option><option value="30">30 minutos antes</option><option value="60">1 hora antes</option><option value="1440">1 día antes</option><option value="10080">1 semana antes</option></select></label>
+  <div id="document-fields" hidden><label>Enlace compartido<input type="url" name="link" placeholder="https://…"></label><label>Importar texto del documento<input type="file" id="doc-file" accept=".txt,.md,.csv"></label><label class="drive-check" id="watch-drive-label" hidden><input type="checkbox" name="watchDrive"> Revisar este enlace de Drive automáticamente</label><button type="button" id="drive-review" class="subtle" hidden>Revisar Drive ahora</button></div>
+  <label id="notes-label">Notas o pasos siguientes<textarea name="notes" rows="3" maxlength="24000"></textarea></label>
+  <p class="form-error" role="alert" hidden></p>
+  <div class="dialog-actions"><button type="button" id="delete-item" class="danger" hidden>Eliminar</button><button class="primary" type="submit">Guardar</button></div>
+</form></dialog>
+<dialog id="notifications"><div class="dialog-heading"><h2>Notificaciones</h2><button class="icon-button close" aria-label="Cerrar" data-icon="x"></button></div><button id="enable-push" class="primary"><span data-icon="bell"></span> Activar en este dispositivo</button><p id="push-status"></p><div id="notice-list"></div></dialog>
+<dialog id="login"><form id="login-form"><div class="brand-icon" data-icon="spark"></div><h2>Tu agenda Amelia</h2><p>Usa la misma clave en tu celular y tu computadora.</p><label>Clave de acceso<input type="password" name="password" required autocomplete="current-password"></label><p class="form-error" role="alert" hidden></p><button class="primary">Entrar</button></form></dialog>
+<div id="toast" role="status" hidden></div>
+</body>
+</html>
